@@ -4,6 +4,7 @@ require 'trollop'
 
 class HaproxyStatus
   attr_accessor :uri, :interval, :page
+  attr_reader :riemann
   def initialize
     args = command_line_args
     @uri = args[:url]
@@ -42,11 +43,11 @@ class HaproxyStatus
   end
 
   def riemann_client
-    Riemann::Client.new host: uri, port: 5555, timeout: 5
+    @riemann ||= Riemann::Client.new host: uri, port: 5555, timeout: 5
   end
 
   def send_riemann_event(service, metric)
-    riemann_client << {
+    riemann << {
       host: "haproxy load balancer",
       service: "haprxy lb #{service}",
       metric: metric.to_f,
