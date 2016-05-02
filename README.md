@@ -7,3 +7,5 @@ Usage
 ````
 riemann_haproxy.rb --url my.riemann.server --interval 3 --page "username:password@my.haproxy.stats:port/haproxy_stats;csv"
 ```
+
+

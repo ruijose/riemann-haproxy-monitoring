@@ -3,8 +3,7 @@ require 'riemann/client'
 require 'trollop'
 
 class HaproxyStatus
-  attr_accessor :uri, :interval, :page
-  attr_reader :riemann
+  attr_reader :uri, :interval, :page, :riemann
   def initialize
     args = command_line_args
     @uri = args[:url]
