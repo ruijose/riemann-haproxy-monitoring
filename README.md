@@ -12,7 +12,7 @@ With Docker
 
 ````
 $ docker build -t riemann-haproxy .
-$ docker run --name rih -d -e HOST=my.riemann.server -e INTERVAL=5 -e HAPROXY_STATUS_PAGE=username:password@my.haproxy.stats:port/haproxy_stats;csv riemann-haproxy
+$ docker run --name rih -d -e RIEMANN_SERVER=my.riemann.server -e INTERVAL=5 -e HAPROXY_STATUS_PAGE=username:password@my.haproxy.stats:port/haproxy_stats;csv riemann-haproxy
 ```
 
 
