@@ -3,7 +3,7 @@ require 'riemann/client'
 require 'trollop'
 
 class HaproxyStatus
-  attr_reader :uri, :interval, :page, :riemann
+  attr_accessor :uri, :interval, :page, :riemann
   def initialize
     args = command_line_args
     @uri = args[:url]
@@ -13,6 +13,7 @@ class HaproxyStatus
 
   def sent_riemann_events
     while true
+      riemann_client
       get_haproxy_csv
       extracted_metrics = get_csv_lines(0)
       load_balancer_stats = get_csv_lines(1)
@@ -64,6 +65,7 @@ class HaproxyStatus
       :request_rate => "req_rate",
       :response_errors => "hrsp_4xx",
       :ok_responses => "hrsp_2xx",
+      :bad_responses => "hrsp_5xx",
     }
   end
 end
